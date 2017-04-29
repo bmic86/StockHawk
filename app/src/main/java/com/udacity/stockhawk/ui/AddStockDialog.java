@@ -55,7 +55,14 @@ public class AddStockDialog extends DialogFragment {
                 });
         builder.setNegativeButton(getString(R.string.dialog_cancel), null);
 
-        Dialog dialog = builder.create();
+        AlertDialog dialog = builder.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_POSITIVE).setContentDescription(getString(R.string.dialog_add));
+                ((AlertDialog)dialog).getButton(DialogInterface.BUTTON_NEGATIVE).setContentDescription(getString(R.string.dialog_cancel));
+            }
+        });
 
         Window window = dialog.getWindow();
         if (window != null) {

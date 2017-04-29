@@ -13,12 +13,14 @@ import android.support.v4.content.Loader;
 import android.support.v4.util.ArraySet;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -168,12 +170,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
 
-    private void setDisplayModeMenuItemIcon(MenuItem item) {
+    private void setDisplayModeMenuItemIcon(ImageView imageView) {
         if (PrefUtils.getDisplayMode(this)
                 .equals(getString(R.string.pref_display_mode_absolute_key))) {
-            item.setIcon(R.drawable.ic_percentage);
+            imageView.setImageResource(R.drawable.ic_percentage);
+            imageView.setContentDescription(getString(R.string.change_units_to_percentage));
         } else {
-            item.setIcon(R.drawable.ic_dollar);
+            imageView.setImageResource(R.drawable.ic_dollar);
+            imageView.setContentDescription(getString(R.string.change_units_to_usd));
         }
     }
 
@@ -181,21 +185,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_settings, menu);
         MenuItem item = menu.findItem(R.id.action_change_units);
-        setDisplayModeMenuItemIcon(item);
+        ImageView imageView = new ImageView(this);
+        setDisplayModeMenuItemIcon(imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PrefUtils.toggleDisplayMode(MainActivity.this);
+                setDisplayModeMenuItemIcon((ImageView)view);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        item.setActionView(imageView);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_change_units) {
-            PrefUtils.toggleDisplayMode(this);
-            setDisplayModeMenuItemIcon(item);
-            adapter.notifyDataSetChanged();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

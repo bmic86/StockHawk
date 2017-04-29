@@ -21,7 +21,7 @@
     <string name="action_change_units">@string/pref_display_mode_key</string>
 
 
-    <string name="dialog_title">Add Stock</string>
+    <string name="dialog_title">@string/add_stock</string>
     <string name="dialog_hint">Symbol (e.g. GOOG)</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_add">Add</string>
@@ -35,4 +35,8 @@
     <string name="pref_invalid_symbols_key" translatable="false">pref_invalid_symbols</string>
     <string name="error_invalid_stock_symbol">Stock information for symbol %s not found.</string>
     <string name="error_many_invalid_stock_symbols">Not found stock information for %d symbols.</string>
+
+    <string name="change_units_to_percentage">Change units to percentage</string>
+    <string name="change_units_to_usd">Change units to USD</string>
+    <string name="add_stock">Add stock</string>
 </resources>
