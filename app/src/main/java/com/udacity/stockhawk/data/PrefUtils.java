@@ -88,4 +88,11 @@ public final class PrefUtils {
         editor.apply();
     }
 
+    public static void setInvalidSymbols(Context context, Set<String> invalidSymbols) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor =  sp.edit();
+        editor.putStringSet(context.getString(R.string.pref_invalid_symbols_key), invalidSymbols);
+        editor.commit();
+    }
+
 }

@@ -6,9 +6,14 @@ import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.preference.PreferenceManager;
+import android.support.v4.util.ArraySet;
+import android.util.Log;
 
+import com.udacity.stockhawk.R;
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
 
@@ -68,12 +73,20 @@ public final class QuoteSyncJob {
 
             ArrayList<ContentValues> quoteCVs = new ArrayList<>();
 
+            Set<String> invalidSymbols = new ArraySet<>();
+
             while (iterator.hasNext()) {
                 String symbol = iterator.next();
 
 
                 Stock stock = quotes.get(symbol);
                 StockQuote quote = stock.getQuote();
+
+                if(quote.getPrice() == null) {
+                    Log.e("%s not found", symbol);
+                    invalidSymbols.add(symbol);
+                    continue;
+                }
 
                 float price = quote.getPrice().floatValue();
                 float change = quote.getChange().floatValue();
@@ -104,6 +117,8 @@ public final class QuoteSyncJob {
                 quoteCVs.add(quoteCV);
 
             }
+
+            PrefUtils.setInvalidSymbols(context, invalidSymbols);
 
             context.getContentResolver()
                     .bulkInsert(

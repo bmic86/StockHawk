@@ -32,4 +32,7 @@
     <string name="toast_stock_added_no_connectivity">Symbol %s added. Will refresh when network available.</string>
     <string name="toast_no_connectivity">Will refresh when network available.</string>
 
+    <string name="pref_invalid_symbols_key" translatable="false">pref_invalid_symbols</string>
+    <string name="error_invalid_stock_symbol">Stock information for symbol %s not found.</string>
+    <string name="error_many_invalid_stock_symbols">Not found stock information for %d symbols.</string>
 </resources>

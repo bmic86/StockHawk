@@ -1,13 +1,16 @@
 package com.udacity.stockhawk.ui;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.util.ArraySet;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,13 +27,16 @@ import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
 import com.udacity.stockhawk.sync.QuoteSyncJob;
 
+import java.util.Set;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,
         SwipeRefreshLayout.OnRefreshListener,
-        StockAdapter.StockAdapterOnClickHandler {
+        StockAdapter.StockAdapterOnClickHandler,
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final int STOCK_LOADER = 0;
     @SuppressWarnings("WeakerAccess")
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @BindView(R.id.error)
     TextView error;
     private StockAdapter adapter;
+    private Toast errorToast;
 
     @Override
     public void onClick(String symbol) {
@@ -76,12 +83,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 String symbol = adapter.getSymbolAtPosition(viewHolder.getAdapterPosition());
-                PrefUtils.removeStock(MainActivity.this, symbol);
-                getContentResolver().delete(Contract.Quote.makeUriForStock(symbol), null, null);
+                deleteStock(symbol);
             }
         }).attachToRecyclerView(stockRecyclerView);
 
 
+    }
+
+    private void deleteStock(String symbol) {
+        PrefUtils.removeStock(MainActivity.this, symbol);
+        getContentResolver().delete(Contract.Quote.makeUriForStock(symbol), null, null);
     }
 
     private boolean networkUp() {
@@ -185,5 +196,42 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        if(s.equals(getString(R.string.pref_invalid_symbols_key))){
+            Set<String> invalidSymbols = sharedPreferences.getStringSet(s, new ArraySet<String>());
+            if(invalidSymbols != null && invalidSymbols.size() > 0) {
+
+                if(errorToast != null)
+                    errorToast.cancel();
+
+                String errorMessage = (invalidSymbols.size() == 1) ?
+                        getString(R.string.error_invalid_stock_symbol, invalidSymbols.iterator().next()) :
+                        getString(R.string.error_many_invalid_stock_symbols, invalidSymbols.size());
+
+                errorToast = Toast.makeText(this, errorMessage, Toast.LENGTH_LONG);
+                errorToast.show();
+
+                for (String symbol : invalidSymbols) {
+                    deleteStock(symbol);
+                }
+
+                PrefUtils.setInvalidSymbols(this, new ArraySet<String>());
+            }
+        }
     }
 }
