@@ -39,4 +39,8 @@
     <string name="change_units_to_percentage">Change units to percentage</string>
     <string name="change_units_to_usd">Change units to USD</string>
     <string name="add_stock">Add stock</string>
+    <string name="extra_stock_symbol_key" translatable="false">extra_stock_symbol</string>
+    <string name="error_stock_symbol_not_found">Stock symbol not found.</string>
+    <string name="chart_content_description">Historical values for %s stock.</string>
+    <string name="historical_data_dataset_label">Historical values for %s stock.</string>
 </resources>

@@ -2,12 +2,14 @@ package com.udacity.stockhawk.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.preference.PreferenceManager;
 
 import com.udacity.stockhawk.R;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 public final class PrefUtils {
@@ -93,6 +95,20 @@ public final class PrefUtils {
         SharedPreferences.Editor editor =  sp.edit();
         editor.putStringSet(context.getString(R.string.pref_invalid_symbols_key), invalidSymbols);
         editor.commit();
+    }
+
+    public static Locale getCurrentLocale(Context context) {
+        Locale locale;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            locale = context.getResources().getConfiguration().getLocales().get(0);
+        } else {
+            locale = context.getResources().getConfiguration().locale;
+        }
+
+        if(locale == null) {
+            locale = Locale.getDefault();
+        }
+        return locale;
     }
 
 }
