@@ -97,18 +97,4 @@ public final class PrefUtils {
         editor.commit();
     }
 
-    public static Locale getCurrentLocale(Context context) {
-        Locale locale;
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            locale = context.getResources().getConfiguration().getLocales().get(0);
-        } else {
-            locale = context.getResources().getConfiguration().locale;
-        }
-
-        if(locale == null) {
-            locale = Locale.getDefault();
-        }
-        return locale;
-    }
-
 }

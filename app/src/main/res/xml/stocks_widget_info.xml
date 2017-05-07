@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DONE (24) Added widget metadata -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:initialKeyguardLayout="@layout/activity_main"
+    android:initialLayout="@layout/activity_main"
+    android:minHeight="@dimen/stocks_widget_default_height"
+    android:minResizeHeight="@dimen/stocks_widget_min_resize_height"
+    android:minResizeWidth="@dimen/stocks_widget_min_resize_width"
+    android:minWidth="@dimen/stocks_widget_default_width"
+    android:resizeMode="horizontal|vertical"
+    android:updatePeriodMillis="0"
+    android:widgetCategory="home_screen|keyguard"
+    tools:ignore="UnusedAttribute"/>

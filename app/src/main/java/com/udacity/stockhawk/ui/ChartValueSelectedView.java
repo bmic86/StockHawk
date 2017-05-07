@@ -9,9 +9,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.udacity.stockhawk.R;
-import com.udacity.stockhawk.data.PrefUtils;
-
-import java.util.Locale;
+import com.udacity.stockhawk.data.FormatUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,8 +32,7 @@ public class ChartValueSelectedView extends MarkerView {
 
     @Override
     public void refreshContent(Entry e, Highlight highlight) {
-        Locale locale = PrefUtils.getCurrentLocale(getContext());
-        String value = String.format(locale, "$%.2f", e.getY());
+        String value = FormatUtils.priceToString(getContext(), e.getY());
         selectedValue.setText(value);
         super.refreshContent(e, highlight);
     }

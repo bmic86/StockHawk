@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 String symbol = adapter.getSymbolAtPosition(viewHolder.getAdapterPosition());
                 deleteStock(symbol);
+                QuoteSyncJob.notifyDataUpdated(MainActivity.this);
             }
         }).attachToRecyclerView(stockRecyclerView);
 
