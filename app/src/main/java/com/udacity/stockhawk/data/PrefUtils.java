@@ -35,7 +35,7 @@ public final class PrefUtils {
             editor.apply();
             return defaultStocks;
         }
-        return prefs.getStringSet(stocksKey, new HashSet<String>());
+        return new HashSet<>(prefs.getStringSet(stocksKey, new HashSet<String>()));
 
     }
 
