@@ -42,6 +42,7 @@ public class StocksWidgetProvider extends AppWidgetProvider {
 
             setRemoteAdapter(context, remoteViews);
             setupClickIntentTemplate(context, remoteViews);
+            remoteViews.setEmptyView(R.id.widget_list, R.id.widget_empty);
 
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
         }
