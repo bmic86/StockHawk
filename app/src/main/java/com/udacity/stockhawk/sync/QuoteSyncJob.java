@@ -81,6 +81,12 @@ public final class QuoteSyncJob {
 
 
                 Stock stock = quotes.get(symbol);
+                if(stock == null) {
+                    Log.e(context.getString(R.string.invalid_symbol_format_error), symbol);
+                    invalidSymbols.add(symbol);
+                    continue;
+                }
+
                 StockQuote quote = stock.getQuote();
 
                 if(quote.getPrice() == null) {
