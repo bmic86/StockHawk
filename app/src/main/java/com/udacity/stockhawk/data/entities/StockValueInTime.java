@@ -1,8 +1,11 @@
 package com.udacity.stockhawk.data.entities;
 
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
+import com.udacity.stockhawk.R;
 
 import java.util.ArrayList;
 
@@ -28,7 +31,7 @@ public class StockValueInTime implements Comparable<StockValueInTime> {
         return value;
     }
 
-    public static ArrayList<StockValueInTime> parseHistoryData(String history) {
+    public static ArrayList<StockValueInTime> parseHistoryData(Context context, String history) {
         ArrayList<StockValueInTime> result = new ArrayList<>();
         String[] records = history.split("\n");
         for (String record : records) {
@@ -38,7 +41,7 @@ public class StockValueInTime implements Comparable<StockValueInTime> {
                 float price = Float.parseFloat(values[1]);
                 result.add(new StockValueInTime(time, price));
             } else {
-                Log.e("StockValueInTime", "Error");
+                Log.e(StockValueInTime.class.getSimpleName(), context.getString(R.string.parse_history_data_error));
             }
         }
         return result;

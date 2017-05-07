@@ -120,7 +120,7 @@ public class DetailsActivity extends AppCompatActivity {
         for(int i=0; i<count; ++i) {
             String history = cursor.getString(COLUMN_HISTORY_INDEX);
             if(history != null && !history.isEmpty()) {
-                result.add(StockValueInTime.parseHistoryData(history));
+                result.add(StockValueInTime.parseHistoryData(this, history));
             }
         }
         cursor.close();

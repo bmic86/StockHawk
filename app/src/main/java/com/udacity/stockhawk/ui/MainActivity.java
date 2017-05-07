@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onClick(String symbol) {
-        Timber.d("Symbol clicked: %s", symbol);
+        Timber.d(getString(R.string.symbol_clicked), symbol);
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra(getString(R.string.extra_stock_symbol_key), symbol);
         startActivity(intent);
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     public void button(@SuppressWarnings("UnusedParameters") View view) {
-        new AddStockDialog().show(getFragmentManager(), "StockDialogFragment");
+        new AddStockDialog().show(getFragmentManager(), getString(R.string.stock_dialog_fragment));
     }
 
     void addStock(String symbol) {

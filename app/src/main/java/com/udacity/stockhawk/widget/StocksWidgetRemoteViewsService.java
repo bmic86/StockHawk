@@ -96,7 +96,7 @@ public class StocksWidgetRemoteViewsService extends RemoteViewsService {
                 views.setTextViewText(R.id.change, formattedChange);
 
                 int colorId = FormatUtils.getChangeDisplayBackgroundColorId(change);
-                views.setInt(R.id.change, "setBackgroundResource", colorId);
+                views.setInt(R.id.change, getString(R.string.set_background_resource), colorId);
 
                 Intent intent = new Intent();
                 intent.putExtra(getString(R.string.extra_stock_symbol_key), symbol);

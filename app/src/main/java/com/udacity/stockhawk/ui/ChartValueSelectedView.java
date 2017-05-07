@@ -16,6 +16,8 @@ import butterknife.ButterKnife;
 
 public class ChartValueSelectedView extends MarkerView {
 
+    static final float Y_OFFSET = 20f;
+
     @BindView(R.id.tv_chart_selected_value)
     TextView selectedValue;
 
@@ -39,6 +41,6 @@ public class ChartValueSelectedView extends MarkerView {
 
     @Override
     public MPPointF getOffset() {
-        return new MPPointF(-(getWidth() / 2), -(getHeight() + 20f));
+        return new MPPointF(-(getWidth() / 2), -(getHeight() + Y_OFFSET));
     }
 }

@@ -10,8 +10,6 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.Locale;
 
 public class FormatUtils {
@@ -32,17 +30,17 @@ public class FormatUtils {
 
     public static String priceToString(Context context, float price) {
         Locale locale = getCurrentLocale(context);
-        return String.format(locale, "$%.2f", price);
+        return String.format(locale, context.getString(R.string.price_format), price);
     }
 
     public static String absoluteChangeToString(Context context, float absoluteChange) {
        Locale locale = getCurrentLocale(context);
-        return String.format(locale, "$%+.2f", absoluteChange);
+        return String.format(locale, context.getString(R.string.absolute_change_format), absoluteChange);
     }
 
     public static String percentageChangeToString(Context context, float percentageChange) {
         Locale locale = getCurrentLocale(context);
-        return String.format(locale, "%+.2f%%", percentageChange / 100);
+        return String.format(locale, context.getString(R.string.percentage_change_format), percentageChange / 100);
     }
 
     public static String dateTimeToString(Context context, DateTime dateTime) {

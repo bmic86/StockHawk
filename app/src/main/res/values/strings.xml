@@ -1,46 +1,49 @@
 <resources>
-    <string name="app_name">Stock Hawk</string>
-
     <string name="pref_stocks_initialized_key" translatable="false">initialized</string>
+    <string name="pref_stocks_key" translatable="false">stocks</string>
+    <string name="pref_display_mode_key" translatable="false">displayMode</string>
+    <string name="pref_display_mode_default" translatable="false">@string/pref_display_mode_percentage_key</string>
+    <string name="pref_display_mode_absolute_key" translatable="false">absolute</string>
+    <string name="pref_display_mode_percentage_key" translatable="false">percentage</string>
+    <string name="pref_invalid_symbols_key" translatable="false">pref_invalid_symbols</string>
+    <string name="default_stocks_yahoo" translatable="false">YHOO</string>
+    <string name="default_stocks_apple" translatable="false">AAPL</string>
+    <string name="default_stocks_microsoft" translatable="false">MSFT</string>
+    <string name="default_stocks_facebook" translatable="false">FB</string>
+    <string name="default_stocks_google" translatable="false">GOOG</string>
+    <string name="action_change_units" translatable="false">@string/pref_display_mode_key</string>
+    <string name="extra_stock_symbol_key" translatable="false">extra_stock_symbol</string>
+    <string name="price_format" translatable="false">$%.2f</string>
+    <string name="absolute_change_format" translatable="false">$%+.2f</string>
+    <string name="percentage_change_format" translatable="false">%+.2f%%</string>
+    <string name="default_stock_delete_selection" translatable="false">1</string>
+    <string name="stock_dialog_fragment" translatable="false">StockDialogFragment</string>
+    <string name="set_background_resource" translatable="false">setBackgroundResource</string>
+    <string name="dialog_title" translatable="false">@string/add_stock</string>
 
-    <string name="pref_stocks_key">stocks</string>
-
-
-    <string name="pref_display_mode_key">displayMode</string>
-    <string name="pref_display_mode_default">@string/pref_display_mode_percentage_key</string>
-
-    <string name="pref_display_mode_absolute_key">absolute</string>
-    <string name="pref_display_mode_percentage_key">percentage</string>
-
-    <string name="default_stocks_yahoo">YHOO</string>
-    <string name="default_stocks_apple">AAPL</string>
-    <string name="default_stocks_microsoft">MSFT</string>
-    <string name="default_stocks_facebook">FB</string>
-
-
-    <string name="action_change_units">@string/pref_display_mode_key</string>
-
-
-    <string name="dialog_title">@string/add_stock</string>
+    <string name="app_name">Stock Hawk</string>
     <string name="dialog_hint">Symbol (e.g. GOOG)</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_add">Add</string>
-
     <string name="error_no_network">No network connectivity! Will load stock cursor when the network is available.</string>
     <string name="error_no_stocks">No stocks added! Hit the floating action button to add one.</string>
-
     <string name="toast_stock_added_no_connectivity">Symbol %s added. Will refresh when network available.</string>
     <string name="toast_no_connectivity">Will refresh when network available.</string>
-
-    <string name="pref_invalid_symbols_key" translatable="false">pref_invalid_symbols</string>
     <string name="error_invalid_stock_symbol">Stock information for symbol %s not found.</string>
     <string name="error_many_invalid_stock_symbols">Not found stock information for %d symbols.</string>
-
     <string name="change_units_to_percentage">Change units to percentage</string>
     <string name="change_units_to_usd">Change units to USD</string>
     <string name="add_stock">Add stock</string>
-    <string name="extra_stock_symbol_key" translatable="false">extra_stock_symbol</string>
     <string name="error_stock_symbol_not_found">Stock symbol not found.</string>
     <string name="chart_content_description">Historical values for %s stock.</string>
     <string name="historical_data_dataset_label">Historical values for %s stock.</string>
+    <string name="parse_history_data_error">Cannot parse stock history data.</string>
+    <string name="unknown_uri_error">Unknown URI: %s</string>
+    <string name="intent_handled_message">Intent handled</string>
+    <string name="running_sync_job">Running sync job</string>
+    <string name="not_found_error">%s not found</string>
+    <string name="error_fetching_quotes">Error fetching stock quotes</string>
+    <string name="scheduling_periodic_task">Scheduling a periodic task</string>
+    <string name="symbol_clicked">Symbol clicked: %s</string>
+    <string name="default_error_message">Error message</string>
 </resources>

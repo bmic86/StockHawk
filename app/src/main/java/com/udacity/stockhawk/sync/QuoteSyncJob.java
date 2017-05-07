@@ -48,7 +48,7 @@ public final class QuoteSyncJob {
 
     static void getQuotes(Context context) {
 
-        Timber.d("Running sync job");
+        Timber.d(context.getString(R.string.running_sync_job));
 
         Calendar from = Calendar.getInstance();
         Calendar to = Calendar.getInstance();
@@ -84,7 +84,7 @@ public final class QuoteSyncJob {
                 StockQuote quote = stock.getQuote();
 
                 if(quote.getPrice() == null) {
-                    Log.e("%s not found", symbol);
+                    Log.e(context.getString(R.string.not_found_error), symbol);
                     invalidSymbols.add(symbol);
                     continue;
                 }
@@ -129,7 +129,7 @@ public final class QuoteSyncJob {
             notifyDataUpdated(context);
 
         } catch (IOException exception) {
-            Timber.e(exception, "Error fetching stock quotes");
+            Timber.e(exception, context.getString(R.string.error_fetching_quotes));
         }
     }
 
@@ -139,7 +139,7 @@ public final class QuoteSyncJob {
     }
 
     private static void schedulePeriodic(Context context) {
-        Timber.d("Scheduling a periodic task");
+        Timber.d(context.getString(R.string.scheduling_periodic_task));
 
 
         JobInfo.Builder builder = new JobInfo.Builder(PERIODIC_ID, new ComponentName(context, QuoteJobService.class));

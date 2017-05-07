@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.udacity.stockhawk.R;
+
 
 public class StockProvider extends ContentProvider {
 
@@ -66,7 +68,7 @@ public class StockProvider extends ContentProvider {
 
                 break;
             default:
-                throw new UnsupportedOperationException("Unknown URI:" + uri);
+                throw new UnsupportedOperationException(getContext().getString(R.string.unknown_uri_error, uri));
         }
 
         Context context = getContext();
@@ -99,7 +101,7 @@ public class StockProvider extends ContentProvider {
                 returnUri = Contract.Quote.URI;
                 break;
             default:
-                throw new UnsupportedOperationException("Unknown URI:" + uri);
+                throw new UnsupportedOperationException(getContext().getString(R.string.unknown_uri_error, uri));
         }
 
         Context context = getContext();
@@ -116,7 +118,7 @@ public class StockProvider extends ContentProvider {
         int rowsDeleted;
 
         if (null == selection) {
-            selection = "1";
+            selection = getContext().getString(R.string.default_stock_delete_selection);
         }
         switch (uriMatcher.match(uri)) {
             case QUOTE:
@@ -137,7 +139,7 @@ public class StockProvider extends ContentProvider {
                 );
                 break;
             default:
-                throw new UnsupportedOperationException("Unknown URI:" + uri);
+                throw new UnsupportedOperationException(getContext().getString(R.string.unknown_uri_error, uri));
         }
 
         if (rowsDeleted != 0) {
